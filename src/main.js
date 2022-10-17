@@ -1,5 +1,9 @@
 import * as THREE from 'three'
+import * as CANNON from 'cannon-es'
+import CannonDebugger from 'cannon-es-debugger'
+
 import { Car } from './car.js'
+import { Checkpoint } from './checkpoint.js'
 
 let scene
 let camera
@@ -10,7 +14,10 @@ let directionalLight
 let car
 let plane
 
-function init(){
+let physicsWorld
+let cannonDebugger
+
+async function init(){
 	console.log("Init started")
 	//Create the scene
 	scene = new THREE.Scene()
@@ -33,15 +40,57 @@ function init(){
 	light = new THREE.AmbientLight(0x445566, 2)
 	scene.add(light)
 
+	//Axishelper
+	let axesHelper = new THREE.AxesHelper(8)
+	axesHelper.position.y += 0.1
+	scene.add(axesHelper)
+
+	
+	//Physics
+	physicsWorld = new CANNON.World({
+		gravity: new CANNON.Vec3(0, -9.81, 0),
+	})
+
+	let groundPlane = new CANNON.Body({
+		type: CANNON.Body.STATIC,
+		shape: new CANNON.Plane(),
+	})
+
+	let sphereBody = new CANNON.Body({
+		mass: 5,
+		shape: new CANNON.Sphere(1)
+	})
+	sphereBody.position.set(0, 7, 0)
+	physicsWorld.addBody(sphereBody)
+
+	let obstacle = new CANNON.Body({
+		mass: 500,
+		//type: CANNON.Body.STATIC,
+		shape: new CANNON.Box(new CANNON.Vec3(1, 5, 2))
+	})
+	obstacle.position.set(0,5,5)
+	physicsWorld.addBody(obstacle)
+
+	groundPlane.quaternion.setFromEuler(-Math.PI / 2, 0, 0)
+	physicsWorld.addBody(groundPlane)
+
+	cannonDebugger = new CannonDebugger(scene, physicsWorld,{
+		color: 0xff0000,
+	})
+	
+
 	//Creating the car
-	car = new Car(scene)
+	car = new Car(scene, physicsWorld)
+
+	//Create a checkpoint
+	//let checkpoint = new Checkpoint(scene, physicsWorld)
 
 	//TEST plane
-	let geometry = new THREE.PlaneGeometry( 100, 50 );
-	let material = new THREE.MeshStandardMaterial( {color: 0x111111, side: THREE.DoubleSide} );
-	plane = new THREE.Mesh( geometry, material );
-	plane.rotation.set(Math.PI/2, 0, 0)
-	scene.add(plane);
+	// let geometry = new THREE.PlaneGeometry( 100, 50 );
+	// let material = new THREE.MeshStandardMaterial( {color: 0x111111, side: THREE.DoubleSide} );
+	// plane = new THREE.Mesh( geometry, material );
+	// plane.rotation.set(Math.PI/2, 0, 0)
+	// scene.add(plane);
 	
 
 	//Renderer
@@ -54,6 +103,9 @@ function init(){
 function animate(){
 	requestAnimationFrame(animate)
 	renderer.render( scene, camera )
+	physicsWorld.fixedStep()
+	cannonDebugger.update()
+
 
 	car.animate()
 }
