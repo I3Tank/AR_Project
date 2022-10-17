@@ -60,7 +60,7 @@ async function init(){
 		mass: 5,
 		shape: new CANNON.Sphere(1)
 	})
-	sphereBody.position.set(0, 7, 0)
+	sphereBody.position.set(0, 7, 5)
 	physicsWorld.addBody(sphereBody)
 
 	let obstacle = new CANNON.Body({
@@ -68,7 +68,7 @@ async function init(){
 		//type: CANNON.Body.STATIC,
 		shape: new CANNON.Box(new CANNON.Vec3(1, 5, 2))
 	})
-	obstacle.position.set(0,5,5)
+	obstacle.position.set(0,5,10)
 	physicsWorld.addBody(obstacle)
 
 	groundPlane.quaternion.setFromEuler(-Math.PI / 2, 0, 0)

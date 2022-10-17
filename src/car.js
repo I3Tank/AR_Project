@@ -17,7 +17,8 @@ class Car{
 
 		//Stats of the car
 		this.speed = 0.1
-		this.steerSpeed = 0.02
+		this.steerSpeed = 0.05
+		this.maxVelocity = 10
 
 		//-1 = backwards | 1 = forward
 		this.speedFactor = 0
@@ -53,12 +54,14 @@ class Car{
 			// console.log("Hitbox: ", this.hitbox)
 			//Create the hitbox of the car
 			this.hitbox = new CANNON.Body({
-				mass: 5,
+				mass: .1,
 				//type: CANNON.Body.STATIC,
 				shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1))
 			})
 			console.log("this.body.position:", this.body.position)
-		
+			//To add friction and limit the max speed
+			this.hitbox.linearDamping = 0.9;
+
 			this.hitbox.position.set(this.body.position.x, this.body.position.y + 1, this.body.position.z)
 			this.physicsWorld.addBody(this.hitbox)
 			console.log("hitbox: ", this.hitbox)
@@ -80,27 +83,19 @@ class Car{
 			//Math :)
 			this.dx = Math.sin(this.direction) * this.speedFactor * this.speed
 			this.dz = Math.cos(this.direction) * this.speedFactor * this.speed
-			//Move the car
-			//this.car.position.x += this.dx
-			//this.car.position.z += this.dz
-			// //Turn the car
-			// this.car.rotation.y = (this.direction - Math.PI)
+
+			//Turn the car
+			//TODO Set the car rotation depending on hitbox rotation
+			this.hitbox.quaternion.setFromEuler(0, (this.direction - Math.PI), 0)
+			this.car.rotation.set(0, (this.direction - Math.PI), 0)
 
 			//Update the postion of the hitbox
-			//console.log(this.dx * 10)
-			this.hitbox.velocity.x = this.dx * 100
-			this.hitbox.velocity.z = this.dz * 100
+			let direction = new CANNON.Vec3(this.dx, 0, this.dz)
+			let force = direction.scale(50)
+			this.hitbox.applyForce(force)
+			this.hitbox.position.set(this.hitbox.position.x, 1.5, this.hitbox.position.z)
+			
 			this.car.position.set(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.position.z)
-			//let quat = new Quaternion(this.hitbox.quaternion.x, this.hitbox.quaternion.y, this.hitbox.quaternion.z, this.hitbox.quaternion.w)
-			//var rotation = new THREE.Euler().setFromQuaternion( quat, 'XYZ' );
-			//console.log(rotation)
-			//this.car.rotation.setFromQuaternion(rotation)
-			//console.log(this.car.rotation)
-			//this.hitbox.position = this.car.position
-			//this.hitbox.position.set(this.car.position.x, this.car.position.y + this.offset, this.car.position.z)
-			//this.hitbox.quaternion.setFromEuler(this.car.rotation.x, this.car.rotation.y, this.car.rotation.z)
-			//console.log(this.hitbox.position)
-
 		}
 	}
 	setupControls(){
