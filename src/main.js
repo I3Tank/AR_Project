@@ -4,6 +4,7 @@ import CannonDebugger from 'cannon-es-debugger'
 
 import { Car } from './car.js'
 import { Checkpoint } from './checkpoint.js'
+import { SimpleTrack } from './simple_track.js'
 
 let scene
 let camera
@@ -57,10 +58,11 @@ async function init(){
 	})
 
 	let sphereBody = new CANNON.Body({
-		mass: 5,
+		mass: 0.01,
 		shape: new CANNON.Sphere(1)
 	})
 	sphereBody.position.set(0, 7, 5)
+	sphereBody.linearDamping = 0.9;
 	physicsWorld.addBody(sphereBody)
 
 	let obstacle = new CANNON.Body({
@@ -85,6 +87,8 @@ async function init(){
 	//Create a checkpoint
 	//let checkpoint = new Checkpoint(scene, physicsWorld)
 
+	//Create a track
+	let simpleTrack = new SimpleTrack(scene)
 	//TEST plane
 	// let geometry = new THREE.PlaneGeometry( 100, 50 );
 	// let material = new THREE.MeshStandardMaterial( {color: 0x111111, side: THREE.DoubleSide} );
@@ -105,6 +109,7 @@ function animate(){
 	renderer.render( scene, camera )
 	physicsWorld.fixedStep()
 	cannonDebugger.update()
+	camera.lookAt(car.car.position)
 
 
 	car.animate()
