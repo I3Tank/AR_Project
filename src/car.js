@@ -62,7 +62,7 @@ class Car{
 			//To add friction and limit the max speed
 			this.hitbox.linearDamping = 0.9;
 
-			this.hitbox.position.set(this.body.position.x, this.body.position.y + 1, this.body.position.z)
+			this.hitbox.position.set(this.body.position.x, this.body.position.y + 1, this.body.position.z + 20)
 			this.physicsWorld.addBody(this.hitbox)
 			console.log("hitbox: ", this.hitbox)
 			

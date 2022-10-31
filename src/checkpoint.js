@@ -3,17 +3,18 @@ import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
 
 class Checkpoint{
-	constructor(scene, physicsWorld){
+	constructor(scene, physicsWorld, checkpointPosition){
 		this.scene = scene
 		this.physicsWorld = physicsWorld
 
+		this.checkpointPosition = checkpointPosition
 		this.checkpoint
 		this.hitbox
 
-		this.loadModel()
+		this.loadModel(this.checkpointPosition)
 	}
 
-	loadModel(){
+	loadModel(checkpointPosition){
 		const loader = new GLTFLoader()
 		loader.load('./assets/3d/checkpoint.glb',(gltf)=>{
 			console.log("gltf loaded",gltf.scene)
@@ -21,16 +22,19 @@ class Checkpoint{
 			this.scene.add(gltf.scene)
 			
 			this.checkpoint = gltf.scene
-
+			
 			this.hitbox = new CANNON.Body({
 				mass: 5,
+				isTrigger: true,
 				type: CANNON.Body.STATIC,
-				shape: new CANNON.Box(new CANNON.Vec3(3, 6, 1))
+				shape: new CANNON.Box(new CANNON.Vec3(1, 10, 6))
 			})
+			this.checkpoint.position.set(this.checkpointPosition.x, this.checkpointPosition.y, this.checkpointPosition.z)
 			this.hitbox.position.set(this.checkpoint.position.x, this.checkpoint.position.y, this.checkpoint.position.z)
+			console.log("PH: ", this.physicsWorld)
 			this.physicsWorld.addBody(this.hitbox)
 			console.log("hitboxCheck: ", this.hitbox)
-
+			
 		},function ( xhr ) {
 			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
 		},function ( error ) {

@@ -5,6 +5,7 @@ import CannonDebugger from 'cannon-es-debugger'
 import { Car } from './car.js'
 import { Checkpoint } from './checkpoint.js'
 import { SimpleTrack } from './simple_track.js'
+import { GameManager } from './gameManager.js'
 
 let scene
 let camera
@@ -12,6 +13,7 @@ let renderer
 let light
 let directionalLight
 
+let gameManager
 let car
 let plane
 
@@ -70,8 +72,8 @@ async function init(){
 		//type: CANNON.Body.STATIC,
 		shape: new CANNON.Box(new CANNON.Vec3(1, 5, 2))
 	})
-	obstacle.position.set(0,5,10)
-	physicsWorld.addBody(obstacle)
+	//obstacle.position.set(0,5,10)
+	//physicsWorld.addBody(obstacle)
 
 	groundPlane.quaternion.setFromEuler(-Math.PI / 2, 0, 0)
 	physicsWorld.addBody(groundPlane)
@@ -80,6 +82,8 @@ async function init(){
 		color: 0xff0000,
 	})
 	
+	//
+	gameManager = new GameManager(scene, physicsWorld)
 
 	//Creating the car
 	car = new Car(scene, physicsWorld)
@@ -87,8 +91,7 @@ async function init(){
 	//Create a checkpoint
 	//let checkpoint = new Checkpoint(scene, physicsWorld)
 
-	//Create a track
-	let simpleTrack = new SimpleTrack(scene)
+	
 	//TEST plane
 	// let geometry = new THREE.PlaneGeometry( 100, 50 );
 	// let material = new THREE.MeshStandardMaterial( {color: 0x111111, side: THREE.DoubleSide} );
@@ -113,6 +116,7 @@ function animate(){
 
 
 	car.animate()
+	gameManager.animate()
 }
 
 init()
