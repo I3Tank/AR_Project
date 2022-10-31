@@ -1,0 +1,34 @@
+body {
+    margin: 0;
+}
+
+.pedals {
+    position: absolute;
+    width: 5vw;
+    bottom: 1%;
+    cursor: pointer;
+}
+
+#throttle {
+    height: 20vh;
+    left: 20vw;
+}
+#brake {
+    height: 15vh;
+    left: 10vw;
+}
+
+.arrows {
+    position: absolute;
+    bottom: 1%;
+    width: 4vw;
+    height: 10vh;
+    cursor: pointer;
+}
+
+#arrowLeft {
+    right: 30vw;
+}
+#arrowRight {
+    right: 15vw;
+}

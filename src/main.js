@@ -20,10 +20,14 @@ let plane
 let physicsWorld
 let cannonDebugger
 
+let isPaused = false
+
 async function init(){
 	console.log("Init started")
 	//Create the scene
 	scene = new THREE.Scene()
+	//scene1 = new THREE.Scene()
+
 
 	//Adjust the aspect ratio for the device and create the camera
 	let aspectRatio = window.innerWidth / window.innerHeight
@@ -98,7 +102,29 @@ async function init(){
 	// plane = new THREE.Mesh( geometry, material );
 	// plane.rotation.set(Math.PI/2, 0, 0)
 	// scene.add(plane);
-	
+
+
+
+	let throttle = document.getElementById("throttle")
+	let brake = document.getElementById("brake")
+
+	throttle.addEventListener('click', onThrottle)
+	brake.addEventListener("click", onBrake)
+
+	let arrowLeft = document.getElementById("arrowLeft")
+	let arrowRight = document.getElementById("arrowRight")
+
+	arrowLeft.addEventListener('click', onArrowLeft)
+	arrowRight.addEventListener("click", onArrowRight)
+
+	//scene.add(throttle)
+
+	//scene.add(brake)
+
+
+
+
+
 
 	//Renderer
 	renderer = new THREE.WebGLRenderer()
@@ -108,16 +134,77 @@ async function init(){
 }
 
 function animate(){
+
+	
 	requestAnimationFrame(animate)
 	renderer.render( scene, camera )
 	physicsWorld.fixedStep()
 	cannonDebugger.update()
 	camera.lookAt(car.car.position)
-
-
+	
 	car.animate()
-	gameManager.animate()
+	
 }
+
+function onPause() {
+	/*document.addEventListener('keydown', (event) => {
+	console.log("HALLOO")
+	let key = event.key
+	if ((key == "w") || (key == "Esc")) {
+		console.log("ESCAAAPE")
+
+	}
+	})*/
+}
+
+
+function onThrottle() {
+	console.log("GAS")
+	isPaused = true
+
+	/*if (car.speedFactor == 0) {
+		car.speedFactor = 1
+	} 
+	else {
+		car.speedFactor = 0
+	}*/
+
+}
+
+function onBrake() {
+	//if (isPaused == false) {
+		console.log("BREMSE")
+		if (car.speedFactor == 0) {
+			car.speedFactor = -1
+		}
+		else {
+			car.speedFactor = 0
+		}
+	//}
+
+
+}
+
+function onArrowLeft() {
+	console.log("LINKS")
+	if (car.steerFactor == 0) {
+		car.steerFactor = -1
+	}
+	else {
+		car.steerFactor = 0
+	}
+}
+
+function onArrowRight() {
+	console.log("RECHTS")
+	if (car.steerFactor == 0) {
+		car.steerFactor = 1
+	}
+	else {
+		car.steerFactor = 0
+	}
+}
+
 
 init()
 animate()
