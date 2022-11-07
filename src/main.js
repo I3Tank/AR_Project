@@ -21,6 +21,8 @@ let physicsWorld
 let cannonDebugger
 
 let isPaused = false
+let pause = document.getElementById("pausebutton")
+
 
 async function init(){
 	console.log("Init started")
@@ -108,7 +110,6 @@ async function init(){
 
 	let throttle = document.getElementById("throttle")
 	let brake = document.getElementById("brake")
-	let pause = document.getElementById("pausebutton")
 
 	throttle.addEventListener('click', onThrottle)
 	brake.addEventListener("click", onBrake)
@@ -120,13 +121,6 @@ async function init(){
 
 	arrowLeft.addEventListener('click', onArrowLeft)
 	arrowRight.addEventListener("click", onArrowRight)
-
-	//scene.add(throttle)
-
-	//scene.add(brake)
-
-
-
 
 
 
@@ -154,9 +148,12 @@ function onPause() {
 
 	if (isPaused == false) {
 		isPaused = true
+		pause.src = "assets/2D/butterfliege.jpg"
+
 	}
 	else {
 		isPaused = false
+		pause.src = "assets/2D/pausebutton.png"
 	}
 }
 
