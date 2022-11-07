@@ -29,6 +29,9 @@ class GameManager{
 			this.lap++
 			console.log(this.lap)
 			this.lastId = id
+			if(this.lap == (this.maxLap * 2 + 1)){
+				this.finishGame()
+			}
 		}
 		
 	}
