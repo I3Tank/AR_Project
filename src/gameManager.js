@@ -9,6 +9,7 @@ class GameManager{
 		this.lap
 		this.maxLap = 3
 		this.checkpoint
+		this.lastId = 0
 
 		this.setupNewGame()
 	}
@@ -22,6 +23,14 @@ class GameManager{
 	}
 	finishGame(){
 		console.log("Finished!")
+	}
+	increaseLapCounter(id){
+		if(this.lastId != id){
+			this.lap++
+			console.log(this.lap)
+			this.lastId = id
+		}
+		
 	}
 	animate(){
 		//this.checkpoint.animate()
