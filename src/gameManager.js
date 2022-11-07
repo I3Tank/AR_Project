@@ -23,6 +23,7 @@ class GameManager{
 	}
 	finishGame(){
 		console.log("Finished!")
+		location.href="end.html"
 	}
 	increaseLapCounter(id){
 		if(this.lastId != id){
