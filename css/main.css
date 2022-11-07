@@ -32,3 +32,10 @@ body {
 #arrowRight {
     right: 15vw;
 }
+
+#pausebutton {
+    position: absolute;
+    margin: 2%;
+    width: 7%;
+    cursor: pointer;
+}

@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
 import { Vector3 } from 'three'
 import { Quaternion } from 'cannon-es'
-//import { Main } from './main.js'
+import { isPaused } from './main.js'
 
 class Car{
 	constructor(scene, physicsWorld){
@@ -76,6 +76,7 @@ class Car{
 	animate(){
 		//need to check if the model is loaded yet
 		if(this.car){
+			if(isPaused == false) {
 			if(!this.rotated){
 				this.direction = Math.PI/2
 				this.rotated = true
@@ -97,8 +98,9 @@ class Car{
 			this.hitbox.applyForce(force)
 			this.hitbox.position.set(this.hitbox.position.x, this.offset, this.hitbox.position.z)
 			
-			this.car.position.set(this.hitbox.position.x, this.hitbox.position.y + this.modelOffset, this.hitbox.position.z)
+			this.car.position.set(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.position.z)
 		}
+	}
 	}
 	setupControls(){
 		document.addEventListener('keydown', (event) => {

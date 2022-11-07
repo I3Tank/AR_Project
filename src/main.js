@@ -108,9 +108,12 @@ async function init(){
 
 	let throttle = document.getElementById("throttle")
 	let brake = document.getElementById("brake")
+	let pause = document.getElementById("pausebutton")
 
 	throttle.addEventListener('click', onThrottle)
 	brake.addEventListener("click", onBrake)
+	pause.addEventListener("click", onPause)
+
 
 	let arrowLeft = document.getElementById("arrowLeft")
 	let arrowRight = document.getElementById("arrowRight")
@@ -148,27 +151,27 @@ function animate(){
 }
 
 function onPause() {
-	/*document.addEventListener('keydown', (event) => {
-	console.log("HALLOO")
-	let key = event.key
-	if ((key == "w") || (key == "Esc")) {
-		console.log("ESCAAAPE")
 
+	if (isPaused == false) {
+		isPaused = true
 	}
-	})*/
+	else {
+		isPaused = false
+	}
 }
 
 
 function onThrottle() {
 	console.log("GAS")
-	isPaused = true
 
-	/*if (car.speedFactor == 0) {
+	if (car.speedFactor == 0) {
 		car.speedFactor = 1
 	} 
 	else {
 		car.speedFactor = 0
-	}*/
+	}
+
+
 
 }
 
@@ -209,5 +212,6 @@ function onArrowRight() {
 
 init()
 animate()
+export { isPaused }
 
 export{ gameManager }
