@@ -32,6 +32,12 @@ class Car{
 		this.dz=0
 		this.rotated = false
 
+		//Animation
+		this.front_right_wheel
+        this.front_left_wheel
+        this.back_left_wheel
+        this.back_right_wheel
+
 		this.loadModel()
 		this.setupControls()
 	}
@@ -48,6 +54,18 @@ class Car{
 			this.car.traverse( (child) => {
 				if(child.name = "body"){
 					this.body = child
+				}
+				if(child.name = "front_right_wheel"){
+					this.front_right_wheel = child
+				}
+				if(child.name = "front_left_wheel"){
+					this.front_left_wheel = child
+				}
+				if(child.name = "back_right_wheel"){
+					this.back_right_wheel = child
+				}
+				if(child.name = "back_left_wheel"){
+					this.back_left_wheel = child
 				}
 			})
 
@@ -81,6 +99,16 @@ class Car{
 				this.direction = Math.PI/2
 				this.rotated = true
 			}
+            if (this.steerFactor == 1) {
+                this.front_left_wheel.rotation.y = -Math.PI / 8
+                this.front_right_wheel.rotation.y = Math.PI / 8
+            } else if (this.steerFactor == -1) {
+                this.front_left_wheel.rotation.y = Math.PI / 8
+                this.front_right_wheel.rotation.y = -Math.PI / 8
+            } else if (this.steerFactor == 0) {
+                this.front_left_wheel.rotation.y = 0
+                this.front_right_wheel.rotation.y = 0
+            }
 			//calculate the direction
 			this.direction -= this.steerFactor * this.steerSpeed
 			//Math :)
@@ -98,7 +126,7 @@ class Car{
 			this.hitbox.applyForce(force)
 			this.hitbox.position.set(this.hitbox.position.x, this.offset, this.hitbox.position.z)
 			
-			this.car.position.set(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.position.z)
+			this.car.position.set(this.hitbox.position.x, this.hitbox.position.y + this.modelOffset, this.hitbox.position.z)
 		}
 	}
 	}
