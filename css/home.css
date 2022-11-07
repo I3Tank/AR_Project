@@ -1,0 +1,53 @@
+body{
+    max-width: 20%;
+    top: 80%;
+    margin: auto
+    
+}
+
+#text{
+   text-align: center;
+   font-size: 40px;
+}
+
+.uiButton{
+    background-color:rgb(70, 54, 134);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 50px;
+    margin: 4px 1px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+    body{
+
+        max-width: 50%;
+        padding-top: 40%;
+        margin: auto;
+        
+    }
+
+    #text{
+        text-align: center;
+        font-size: 20px;
+     }
+
+     .uiButton{
+        background-color:rgb(70, 54, 134);
+        border: none;
+        color: white;
+        padding: 1px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 50px;
+        margin: 4px 1px;
+        cursor: pointer;
+    }
+
+}

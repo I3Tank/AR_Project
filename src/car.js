@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
 import { Vector3 } from 'three'
 import { Quaternion } from 'cannon-es'
+//import { Main } from './main.js'
 
 class Car{
 	constructor(scene, physicsWorld){
@@ -77,7 +78,8 @@ class Car{
 	animate(){
 		//need to check if the model is loaded yet
 		if(this.car){
-			
+			console.log("HILFEE")
+
 			//calculate the direction
 			this.direction -= this.steerFactor * this.steerSpeed
 			//Math :)
