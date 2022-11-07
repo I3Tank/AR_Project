@@ -1,11 +1,14 @@
 import { GLTFLoader } from '../lib/three/examples/jsm/loaders/GLTFLoader.js'
+import { gameManager } from './main.js'
 import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
 
+
 class Checkpoint{
-	constructor(scene, physicsWorld, checkpointPosition){
+	constructor(scene, physicsWorld, checkpointPosition, id){
 		this.scene = scene
 		this.physicsWorld = physicsWorld
+		this.id = id
 
 		this.checkpointPosition = checkpointPosition
 		this.checkpoint
@@ -29,6 +32,10 @@ class Checkpoint{
 				type: CANNON.Body.STATIC,
 				shape: new CANNON.Box(new CANNON.Vec3(1, 10, 6))
 			})
+			//Add a trigger
+			this.hitbox.addEventListener('collide', (event) => {
+        		gameManager.increaseLapCounter(this.id)
+        	})
 			this.checkpoint.position.set(this.checkpointPosition.x, this.checkpointPosition.y, this.checkpointPosition.z)
 			this.hitbox.position.set(this.checkpoint.position.x, this.checkpoint.position.y, this.checkpoint.position.z)
 			console.log("PH: ", this.physicsWorld)

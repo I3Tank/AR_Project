@@ -92,6 +92,7 @@ async function init(){
 	//Creating the car
 	car = new Car(scene, physicsWorld)
 
+
 	//Create a checkpoint
 	//let checkpoint = new Checkpoint(scene, physicsWorld)
 
@@ -208,3 +209,5 @@ function onArrowRight() {
 
 init()
 animate()
+
+export{ gameManager }

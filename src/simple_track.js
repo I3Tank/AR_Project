@@ -42,8 +42,8 @@ class SimpleTrack{
 		})
 	}
 	createCheckpoints(){
-		this.c1 = new Checkpoint(this.scene, this.physicsWorld, this.c1Position)
-		this.c2 = new Checkpoint(this.scene, this.physicsWorld, this.c2Position)
+		this.c1 = new Checkpoint(this.scene, this.physicsWorld, this.c1Position, 1)
+		this.c2 = new Checkpoint(this.scene, this.physicsWorld, this.c2Position, 2)
 	}
 	createBorders(){
 		//Up Down Outer

@@ -14,7 +14,9 @@ class Car{
 		this.car
 		this.body
 		this.hitbox
-		this.offset = 1
+		//Offset of the box
+		this.offset = 1.5
+		this.modelOffset = -1.5
 
 		//Stats of the car
 		this.speed = 0.1
@@ -28,6 +30,7 @@ class Car{
 		this.direction = 0
 		this.dx=0
 		this.dz=0
+		this.rotated = false
 
 		this.loadModel()
 		this.setupControls()
@@ -49,17 +52,12 @@ class Car{
 			})
 
 			console.log("Loaded: ", this.car)
-
-			// this.hitbox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3())
-			// this.hitbox.setFromObject(this.body)
-			// console.log("Hitbox: ", this.hitbox)
 			//Create the hitbox of the car
 			this.hitbox = new CANNON.Body({
 				mass: .1,
 				//type: CANNON.Body.STATIC,
 				shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1))
 			})
-			console.log("this.body.position:", this.body.position)
 			//To add friction and limit the max speed
 			this.hitbox.linearDamping = 0.9;
 
@@ -78,8 +76,10 @@ class Car{
 	animate(){
 		//need to check if the model is loaded yet
 		if(this.car){
-			console.log("HILFEE")
-
+			if(!this.rotated){
+				this.direction = Math.PI/2
+				this.rotated = true
+			}
 			//calculate the direction
 			this.direction -= this.steerFactor * this.steerSpeed
 			//Math :)
@@ -95,9 +95,9 @@ class Car{
 			let direction = new CANNON.Vec3(this.dx, 0, this.dz)
 			let force = direction.scale(50)
 			this.hitbox.applyForce(force)
-			this.hitbox.position.set(this.hitbox.position.x, 1.5, this.hitbox.position.z)
+			this.hitbox.position.set(this.hitbox.position.x, this.offset, this.hitbox.position.z)
 			
-			this.car.position.set(this.hitbox.position.x, this.hitbox.position.y, this.hitbox.position.z)
+			this.car.position.set(this.hitbox.position.x, this.hitbox.position.y + this.modelOffset, this.hitbox.position.z)
 		}
 	}
 	setupControls(){
