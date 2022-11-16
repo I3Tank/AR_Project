@@ -22,7 +22,18 @@ let cannonDebugger
 
 let isPaused = false
 let pause = document.getElementById("pausebutton")
+const sceneEl = document.querySelector('a-scene')
+const arSystem = sceneEl.systems["mindar-image-system"]
+arSystem.start(); // start the engine 
+const exampleTarget = document.querySelector('#example-target');
+exampleTarget.addEventListener("targetFound", function() {
+	init()
+	animate()
+})
 
+function test() {
+	console.log("TEEEESSSSTTT")
+}
 
 async function init(){
 	console.log("Init started")
@@ -219,8 +230,8 @@ function onArrowRight() {
 }
 
 
-init()
-animate()
+//init()
+//animate()
 export { isPaused }
 
 export{ gameManager }
