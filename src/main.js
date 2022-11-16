@@ -111,10 +111,10 @@ async function init(){
 	let throttle = document.getElementById("throttle")
 	let brake = document.getElementById("brake")
 
-	throttle.addEventListener('mousedown', onThrottle)
-	brake.addEventListener("mousedown", onBrake)
-	throttle.addEventListener('mouseup', onNoPedal)
-	brake.addEventListener("mouseup", onNoPedal)
+	throttle.addEventListener('click', onThrottle)
+	brake.addEventListener("click", onBrake)
+	/*throttle.addEventListener('mouseup', onNoPedal)
+	brake.addEventListener("mouseup", onNoPedal)*/
 
 	pause.addEventListener("click", onPause)
 
@@ -122,11 +122,11 @@ async function init(){
 	let arrowLeft = document.getElementById("arrowLeft")
 	let arrowRight = document.getElementById("arrowRight")
 
-	arrowLeft.addEventListener('mousedown', onArrowLeft)
-	arrowLeft.addEventListener('mouseup', onNoArrow)
+	arrowLeft.addEventListener('click', onArrowLeft)
+	//arrowLeft.addEventListener('mouseup', onNoArrow)
 
-	arrowRight.addEventListener("mousedown", onArrowRight)
-	arrowRight.addEventListener("mouseup", onNoArrow)
+	arrowRight.addEventListener("click", onArrowRight)
+	//arrowRight.addEventListener("mouseup", onNoArrow)
 
 
 
