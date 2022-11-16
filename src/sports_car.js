@@ -36,6 +36,12 @@ class sports_car {
                     this.front_right_wheel.rotation.y = 0
                 }
 
+                this.front_left_wheel.rotation.z += this.speed*0.5
+                this.front_right_wheel.rotation.z += this.speed*0.5
+                this.back_left_wheel.rotation.z += this.speed*0.5
+                this.back_right_wheel.rotation.z += this.speed*0.5
+
+
                 //this.buggy.position.x+=this.speed*0.01
                 this.direction -= this.steering * 0.01
 
@@ -63,9 +69,9 @@ class sports_car {
                 gltf.scene.scale.z = 0.01
                 this.scene.add(gltf.scene)
 
-                this.buggy = gltf.scene
+                this.sports_car = gltf.scene
 
-                this.buggy.traverse((child) => {
+                this.sports_car.traverse((child) => {
                     console.log("child", child)
 
                     if (child.name == "front_left_wheel") {
