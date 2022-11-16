@@ -11,55 +11,17 @@
 	</head>
 
 	<body>
-		<!--<a-scene mindar-image="imageTargetSrc: ./assets/mind/wall.mind" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+
+		<a-scene mindar-image="imageTargetSrc: ./assets/mind/wall.mind" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
 			<a-assets>
-			
-			  <a-asset-item id="wall3d" src="./assets/3D/wall_3D.glb"></a-asset-item>
+			  <a-asset-item id="strecke" src="./assets/3D/simple_track.glb"></a-asset-item>
 			</a-assets>
 	  
 			<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 			<a-entity mindar-image-target="targetIndex: 0">
-			 
-			  <a-gltf-model rotation="0.250 0.250 0.250 " position="0 0 0.1" scale="0.085 0.085 0.085" src="#wall3d" animation="property: position; to: 0 0.1 0.1; dur: 1000; loop: false; dir: alternate">
+			  <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.010 0.010 0.010" src="#strecke" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: false; dir: alternate">
 			</a-entity>
-
-			<a-assets>
-		
-		  </a-scene>
-		  
-		<a-scene mindar-image="imageTargetSrc: ./assets/mind/wall.mind" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-			<a-assets>
-				<a-asset-item id="strecke3d" src="./assets/3D/simple_track.glb"></a-asset-item>
-			</a-assets>
-			<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-			<a-entity mindar-image-target="targetIndex: 0">
-		 
-		  	<a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.085 0.085 0.085" src="#strecke3d" animation="property: position; to: 0 0.1 0.1; dur: 1000; loop: false; dir: alternate">
-			</a-entity>
-
-	</a-scene>-->
-
-	<a-scene mindar-image="imageTargetSrc: ./assets/mind/targets.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-		<a-assets>
-			<a-asset-item id="strecke3d" src="./assets/3D/simple_track.glb"></a-asset-item>
-			<a-asset-item id="wall3d" src="./assets/3D/wall_3D.glb"></a-asset-item>
-		</a-assets>
-	
-		<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-		<a-entity mindar-image-target="targetIndex: 0">
-		 
-			<a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.085 0.085 0.085" src="#strecke3d" animation="property: position; to: 0 0.1 0.1; dur: 1000; loop: false; dir: alternate">
-		</a-entity>
-
-		<a-entity mindar-image-target="targetIndex: 1">
-			 
-			<a-gltf-model rotation="0.250 0.250 0.250 " position="0 0 0.1" scale="0.085 0.085 0.085" src="#wall3d" animation="property: position; to: 0 0.1 0.1; dur: 1000; loop: false; dir: alternate">
-		</a-entity>
-	
-	
-	</a-scene>
-
+		</a-scene>
 
 	<!--	<div id="ui">
 			<div id="button1" class="uiButton"> button 1 </div>
