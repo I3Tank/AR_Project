@@ -75,7 +75,7 @@ class Car{
 			this.hitbox = new CANNON.Body({
 				mass: .1,
 				//type: CANNON.Body.STATIC,
-				shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1))
+				shape: new CANNON.Box(new CANNON.Vec3(1.5, 1, 3))
 			})
 			//To add friction and limit the max speed
 			this.hitbox.linearDamping = 0.9;
