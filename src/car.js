@@ -46,25 +46,26 @@ class Car{
 		//return new Promise((resolve, reject) => {
 		//	loader.loadAsync('./assets/3d/block_car.glb', (gltf)=> resolve(gltf), null, reject)
 		//})
-		loader.load('./assets/3d/block_car.glb',(gltf)=>{
+		console.log("loading model")
+		loader.load('./assets/3d/sports_car.glb',(gltf)=>{
 			this.scene.add(gltf.scene)
 			
 			this.car = gltf.scene
 
 			this.car.traverse( (child) => {
-				if(child.name = "body"){
+				if(child.name === "body"){
 					this.body = child
 				}
-				if(child.name = "front_right_wheel"){
+				if(child.name == "front_right_wheel"){
 					this.front_right_wheel = child
 				}
-				if(child.name = "front_left_wheel"){
+				if(child.name == "front_left_wheel"){
 					this.front_left_wheel = child
 				}
-				if(child.name = "back_right_wheel"){
+				if(child.name == "back_right_wheel"){
 					this.back_right_wheel = child
 				}
-				if(child.name = "back_left_wheel"){
+				if(child.name == "back_left_wheel"){
 					this.back_left_wheel = child
 				}
 			})
@@ -89,46 +90,50 @@ class Car{
 		},function ( error ) {
 			console.log( 'An error happened' );
 		})
-		
 	}
 	animate(){
 		//need to check if the model is loaded yet
 		if(this.car){
 			if(isPaused == false) {
-			if(!this.rotated){
-				this.direction = Math.PI/2
-				this.rotated = true
-			}
-            if (this.steerFactor == 1) {
-                this.front_left_wheel.rotation.y = -Math.PI / 8
-                this.front_right_wheel.rotation.y = Math.PI / 8
-            } else if (this.steerFactor == -1) {
-                this.front_left_wheel.rotation.y = Math.PI / 8
-                this.front_right_wheel.rotation.y = -Math.PI / 8
-            } else if (this.steerFactor == 0) {
-                this.front_left_wheel.rotation.y = 0
-                this.front_right_wheel.rotation.y = 0
-            }
-			//calculate the direction
-			this.direction -= this.steerFactor * this.steerSpeed
-			//Math :)
-			this.dx = Math.sin(this.direction) * this.speedFactor * this.speed
-			this.dz = Math.cos(this.direction) * this.speedFactor * this.speed
+				if(!this.rotated){
+					this.direction = Math.PI/2
+					this.rotated = true
+				}
+				if (this.steerFactor == 1) {
+					this.front_left_wheel.rotation.y = -Math.PI / 8
+					this.front_right_wheel.rotation.y = -Math.PI / 8
+				} else if (this.steerFactor == -1) {
+					this.front_left_wheel.rotation.y = Math.PI / 8
+					this.front_right_wheel.rotation.y = Math.PI / 8
+				} else if (this.steerFactor == 0) {
+					this.front_left_wheel.rotation.y = 0
+					this.front_right_wheel.rotation.y = 0
+				}
 
-			//Turn the car
-			//TODO Set the car rotation depending on hitbox rotation
-			this.hitbox.quaternion.setFromEuler(0, (this.direction - Math.PI), 0)
-			this.car.rotation.set(0, (this.direction - Math.PI), 0)
+				this.front_left_wheel.rotation.x -= this.speedFactor * 0.05
+				this.front_right_wheel.rotation.x -= this.speedFactor * 0.05
+				this.back_left_wheel.rotation.x -= this.speedFactor * 0.05
+				this.back_right_wheel.rotation.x -= this.speedFactor * 0.05
+				//calculate the direction
+				this.direction -= this.steerFactor * this.steerSpeed
+				//Math :)
+				this.dx = Math.sin(this.direction) * this.speedFactor * this.speed
+				this.dz = Math.cos(this.direction) * this.speedFactor * this.speed
 
-			//Update the postion of the hitbox
-			let direction = new CANNON.Vec3(this.dx, 0, this.dz)
-			let force = direction.scale(50)
-			this.hitbox.applyForce(force)
-			this.hitbox.position.set(this.hitbox.position.x, this.offset, this.hitbox.position.z)
+				//Turn the car
+				//TODO Set the car rotation depending on hitbox rotation
+				this.hitbox.quaternion.setFromEuler(0, (this.direction - Math.PI), 0)
+				this.car.rotation.set(0, (this.direction - Math.PI), 0)
+
+				//Update the postion of the hitbox
+				let direction = new CANNON.Vec3(this.dx, 0, this.dz)
+				let force = direction.scale(50)
+				this.hitbox.applyForce(force)
+				this.hitbox.position.set(this.hitbox.position.x, this.offset, this.hitbox.position.z)
 			
-			this.car.position.set(this.hitbox.position.x, this.hitbox.position.y + this.modelOffset, this.hitbox.position.z)
+				this.car.position.set(this.hitbox.position.x, this.hitbox.position.y + this.modelOffset, this.hitbox.position.z)
+			}
 		}
-	}
 	}
 	setupControls(){
 		document.addEventListener('keydown', (event) => {

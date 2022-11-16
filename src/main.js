@@ -65,19 +65,19 @@ async function init(){
 		shape: new CANNON.Plane(),
 	})
 
-	let sphereBody = new CANNON.Body({
-		mass: 0.01,
-		shape: new CANNON.Sphere(1)
-	})
-	sphereBody.position.set(0, 7, 5)
-	sphereBody.linearDamping = 0.9;
-	physicsWorld.addBody(sphereBody)
+	//let sphereBody = new CANNON.Body({
+	//	mass: 0.01,
+	//	shape: new CANNON.Sphere(1)
+	//})
+	//sphereBody.position.set(0, 7, 5)
+	//sphereBody.linearDamping = 0.9;
+	//physicsWorld.addBody(sphereBody)
 
-	let obstacle = new CANNON.Body({
-		mass: 500,
-		//type: CANNON.Body.STATIC,
-		shape: new CANNON.Box(new CANNON.Vec3(1, 5, 2))
-	})
+	//let obstacle = new CANNON.Body({
+	//	mass: 500,
+	//	//type: CANNON.Body.STATIC,
+	//	shape: new CANNON.Box(new CANNON.Vec3(1, 5, 2))
+	//})
 	//obstacle.position.set(0,5,10)
 	//physicsWorld.addBody(obstacle)
 
@@ -138,16 +138,14 @@ async function init(){
 }
 
 function animate(){
-
-	
 	requestAnimationFrame(animate)
 	renderer.render( scene, camera )
 	physicsWorld.fixedStep()
 	cannonDebugger.update()
-	camera.lookAt(car.car.position)
-	
+	if (car.car) {
+		camera.lookAt(car.car.position)
+	}
 	car.animate()
-	
 }
 
 function onPause() {

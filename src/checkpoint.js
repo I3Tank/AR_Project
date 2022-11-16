@@ -20,7 +20,7 @@ class Checkpoint{
 	loadModel(checkpointPosition){
 		const loader = new GLTFLoader()
 		loader.load('./assets/3d/checkpoint.glb',(gltf)=>{
-			console.log("gltf loaded",gltf.scene)
+			//console.log("gltf loaded",gltf.scene)
 
 			this.scene.add(gltf.scene)
 			
@@ -38,9 +38,9 @@ class Checkpoint{
         	})
 			this.checkpoint.position.set(this.checkpointPosition.x, this.checkpointPosition.y, this.checkpointPosition.z)
 			this.hitbox.position.set(this.checkpoint.position.x, this.checkpoint.position.y, this.checkpoint.position.z)
-			console.log("PH: ", this.physicsWorld)
+			//console.log("PH: ", this.physicsWorld)
 			this.physicsWorld.addBody(this.hitbox)
-			console.log("hitboxCheck: ", this.hitbox)
+			//console.log("hitboxCheck: ", this.hitbox)
 			
 		},function ( xhr ) {
 			console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
