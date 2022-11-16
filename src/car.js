@@ -46,8 +46,7 @@ class Car{
 		//return new Promise((resolve, reject) => {
 		//	loader.loadAsync('./assets/3d/block_car.glb', (gltf)=> resolve(gltf), null, reject)
 		//})
-		console.log("loading model")
-		loader.load('./assets/3d/sports_car.glb',(gltf)=>{
+		loader.load('./assets/3D/sports_car.glb',(gltf)=>{
 			this.scene.add(gltf.scene)
 			
 			this.car = gltf.scene

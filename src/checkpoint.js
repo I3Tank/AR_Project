@@ -19,8 +19,8 @@ class Checkpoint{
 
 	loadModel(checkpointPosition){
 		const loader = new GLTFLoader()
-		loader.load('./assets/3d/checkpoint.glb',(gltf)=>{
-			//console.log("gltf loaded",gltf.scene)
+		loader.load('./assets/3D/checkpoint.glb',(gltf)=>{
+			console.log("gltf loaded",gltf.scene)
 
 			this.scene.add(gltf.scene)
 			

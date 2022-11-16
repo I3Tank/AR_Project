@@ -60,7 +60,7 @@ class sports_car {
         loadModel()
         {
             const loader = new GLTFLoader()
-            loader.load('./assets/3d/sports_car.glb', (gltf) => {
+            loader.load('./assets/3D/sports_car.glb', (gltf) => {
                 console.log("gltf loaded", gltf.scene)
 
 

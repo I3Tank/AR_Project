@@ -27,7 +27,7 @@ class SimpleTrack{
 
 	loadModel(){
 		const loader = new GLTFLoader()
-		loader.load('./assets/3d/simple_track.glb',(gltf)=>{
+		loader.load('./assets/3D/simple_track.glb',(gltf)=>{
 			console.log("gltf loaded",gltf.scene)
 
 			this.scene.add(gltf.scene)
