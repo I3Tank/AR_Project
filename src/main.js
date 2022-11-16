@@ -111,16 +111,22 @@ async function init(){
 	let throttle = document.getElementById("throttle")
 	let brake = document.getElementById("brake")
 
-	throttle.addEventListener('click', onThrottle)
-	brake.addEventListener("click", onBrake)
+	throttle.addEventListener('mousedown', onThrottle)
+	brake.addEventListener("mousedown", onBrake)
+	throttle.addEventListener('mouseup', onNoPedal)
+	brake.addEventListener("mouseup", onNoPedal)
+
 	pause.addEventListener("click", onPause)
 
 
 	let arrowLeft = document.getElementById("arrowLeft")
 	let arrowRight = document.getElementById("arrowRight")
 
-	arrowLeft.addEventListener('click', onArrowLeft)
-	arrowRight.addEventListener("click", onArrowRight)
+	arrowLeft.addEventListener('mousedown', onArrowLeft)
+	arrowLeft.addEventListener('mouseup', onNoArrow)
+
+	arrowRight.addEventListener("mousedown", onArrowRight)
+	arrowRight.addEventListener("mouseup", onNoArrow)
 
 
 
@@ -186,6 +192,10 @@ function onBrake() {
 
 }
 
+function onNoPedal() {
+	car.speedFactor = 0
+}
+
 function onArrowLeft() {
 	console.log("LINKS")
 	if (car.steerFactor == 0) {
@@ -194,6 +204,10 @@ function onArrowLeft() {
 	else {
 		car.steerFactor = 0
 	}
+}
+
+function onNoArrow() {
+	car.steerFactor = 0
 }
 
 function onArrowRight() {
