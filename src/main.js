@@ -29,6 +29,8 @@ const exampleTarget = document.querySelector('#example-target');
 exampleTarget.addEventListener("targetFound", function() {
 	init()
 	animate()
+	sceneEl.remove()
+	console.log("Bild scannen test")
 })
 
 function test() {
