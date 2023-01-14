@@ -30,7 +30,14 @@ exampleTarget.addEventListener("targetFound", function() {
 	init()
 	animate()
 	sceneEl.remove()
-	console.log("Bild scannen test")
+	console.log("Bild scannen test1")
+})
+const exampleTarget2 = document.querySelector('#example-target2');
+exampleTarget2.addEventListener("targetFound", function() {
+	init()
+	animate()
+	sceneEl.remove()
+	console.log("Bild scannen test2")
 })
 
 function test() {
