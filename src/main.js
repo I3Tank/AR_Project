@@ -21,23 +21,26 @@ let physicsWorld
 let cannonDebugger
 
 let isPaused = false
+let chosenCar
 let pause = document.getElementById("pausebutton")
 const sceneEl = document.querySelector('a-scene')
 const arSystem = sceneEl.systems["mindar-image-system"]
 arSystem.start(); // start the engine 
 const exampleTarget = document.querySelector('#example-target');
 exampleTarget.addEventListener("targetFound", function() {
+	chosenCar = "SportsCar"
 	init()
 	animate()
 	sceneEl.remove()
-	console.log("Bild scannen test1")
+	console.log("Test1")
 })
 const exampleTarget2 = document.querySelector('#example-target2');
 exampleTarget2.addEventListener("targetFound", function() {
+	chosenCar = "BlockCar"
 	init()
 	animate()
 	sceneEl.remove()
-	console.log("Bild scannen test2")
+	console.log("Test2")
 })
 
 function test() {
@@ -111,8 +114,10 @@ async function init(){
 	//
 	gameManager = new GameManager(scene, physicsWorld)
 
+
+	console.log("Chosencar = " + chosenCar)
 	//Creating the car
-	car = new Car(scene, physicsWorld)
+	car = new Car(scene, physicsWorld, chosenCar)
 
 
 	//Create a checkpoint

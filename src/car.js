@@ -6,9 +6,10 @@ import { Quaternion } from 'cannon-es'
 import { isPaused } from './main.js'
 
 class Car{
-	constructor(scene, physicsWorld){
+	constructor(scene, physicsWorld, chosenCar){
 		this.scene = scene
 		this.physicsWorld = physicsWorld
+		this.chosenCar = chosenCar
 
 		//Parts of the car
 		this.car
@@ -43,10 +44,17 @@ class Car{
 	}
 	loadModel(){
 		const loader = new GLTFLoader()
+		let path = ''
 		//return new Promise((resolve, reject) => {
 		//	loader.loadAsync('./assets/3d/block_car.glb', (gltf)=> resolve(gltf), null, reject)
 		//})
-		loader.load('./assets/3D/sports_car.glb',(gltf)=>{
+		if(this.chosenCar == "BlockCar"){
+			this.path = './assets/3D/block_car.glb'
+		} else if( this.chosenCar == "SportsCar"){
+			this.path = './assets/3D/sports_car.glb'
+		}
+
+		loader.load(this.path,(gltf)=>{
 			this.scene.add(gltf.scene)
 			
 			this.car = gltf.scene
