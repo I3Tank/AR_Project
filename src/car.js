@@ -79,11 +79,20 @@ class Car{
 
 			console.log("Loaded: ", this.car)
 			//Create the hitbox of the car
-			this.hitbox = new CANNON.Body({
-				mass: .1,
-				//type: CANNON.Body.STATIC,
-				shape: new CANNON.Box(new CANNON.Vec3(1.5, 1, 3))
-			})
+			if(this.chosenCar == "SportsCar"){
+				this.hitbox = new CANNON.Body({
+					mass: .1,
+					//type: CANNON.Body.STATIC,
+					shape: new CANNON.Box(new CANNON.Vec3(1.5, 1, 3))
+				})
+			}
+			else if (this.chosenCar == "BlockCar"){
+				this.hitbox = new CANNON.Body({
+					mass: .1,
+					//type: CANNON.Body.STATIC,
+					shape: new CANNON.Box(new CANNON.Vec3(1.5, 1, 1.5))
+				})
+			}
 			//To add friction and limit the max speed
 			this.hitbox.linearDamping = 0.9;
 
